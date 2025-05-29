@@ -13,7 +13,7 @@ return {
                 local file, count = string.gsub(data.file, "NvimTree_1", "")
                 local directory = vim.fn.isdirectory(file) == 1
                 
-                if (directory) then
+                if directory then
                     api.tree.open()
                 else
                     api.tree.toggle({ focus = false })
