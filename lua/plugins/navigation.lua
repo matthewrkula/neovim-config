@@ -10,7 +10,14 @@ return {
             vim.keymap.set('n', '<leader>k', '<C-w>k', { noremap = true, silent = true })
 
             local function open_nvim_tree(data)
-                api.tree.toggle({ focus = false })
+                local file, count = string.gsub(data.file, "NvimTree_1", "")
+                local directory = vim.fn.isdirectory(file) == 1
+                
+                if (directory) then
+                    api.tree.open()
+                else
+                    api.tree.toggle({ focus = false })
+                end
             end
             vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
         end
